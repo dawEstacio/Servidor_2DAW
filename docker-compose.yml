@@ -22,18 +22,14 @@ services:
       - servidor_network
 
   web:
-    image: golang:1.15
+    build:
+      context: ./go
+      args:
+        - MODULE_NAME=goApp
     container_name: go_container
-    working_dir: /go/src/goApp
+    working_dir: /go/src/${MODULE_NAME}
     volumes:
-      - ./go:/go/src/goApp
-    command: >
-      bash -c " rm -f go.mod || true
-      && rm -f go.sum || true
-      && go mod init goApp
-      && go mod tidy
-      && go get github.com/pilu/fresh
-      && fresh "
+      - ./go:/go/src/${MODULE_NAME}
     ports:
       - "8090:3000"
     labels:
