@@ -1,31 +1,35 @@
+# Proyecto Servidor 2DAW
 
-# Laravel-docker-redis
+Ejemplo con algunas mejoras aplicadas en el fichero docker-compose.yml del proyecto del módulo de servidor de 2º de DAW
 
-Simple example: How to use laravel and redis using docker compose
+## Instalación y ejecución
 
-## Installation 
-
- ```Clone the repo```
- 
-Now run the following commands from from project root directory.Before Running the commands be sure that you have installed docker.You will get install instructions from this
- [link](https://docs.docker.com/)
+Clonar el repositorio y ejecutar:
 
 ```sh
-docker-compose build
+docker-compose up --build
 
 ```
 
+Accesos:
 
-```sh
-docker-compose up -d
+- Servicio de GO
 
-```
+  ```
+  http://localhost:8090/
 
-Now browse project 
+  ```
 
- ```
- http://localhost:8083/
+- Servicio de traefik
 
-```
+  ```
+  http://localhost:8080/
 
-Now the system is ready and you can practice redis. You can see the example in routes folder web.php page. If you want to modify database name, password etc, you have to change in docker-compose.yml file.
+  ```
+
+- Servicio de laravel
+
+  ```
+  http://localhost:8083/
+
+  ```
