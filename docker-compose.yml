@@ -41,6 +41,30 @@ services:
     networks:
       - servidor_network
 
+  movies:
+    image: golang:1.15
+    container_name: go_movies_container
+    working_dir: /go/src/goMovies
+    volumes:
+      - ./go/movies:/go/src/goMovies
+    ports:
+      - "8091:8080"
+    command: >
+      bash -c " rm -f go.mod || true
+      && rm -f go.sum || true
+      && go mod init goMovies
+      && go mod tidy
+      && go get github.com/pilu/fresh
+      && fresh "
+    labels:
+      traefik.backend: "movies"
+      traefik.frontend.rule: "PathPrefix:/"
+    depends_on:
+      - database
+      - redis
+    networks:
+      - servidor_network
+
   database:
     image: mysql:5.7
     container_name: database_container
